@@ -1,0 +1,46 @@
+@use 'adaptive-pixel/dist/mixins' as *
+
+.wrap
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  width: 100%
+  height: 100%
+  text-align: center
+  +desktop
+    gap: apx(40)
+  +mobile
+    gap: apx(20)
+    padding: apx(20)
+
+h1
+  +desktop
+    +afs(32)
+  +mobile
+    +afs(16)
+
+.text
+  +desktop
+    +afs(24, 130%, 700)
+  +mobile
+    +afs(12)
+
+.accent
+  font-weight: 700
+  +desktop
+    color: #89a2ef
+  +mobile
+    color: #ffb69b
+
+.img
+  display: block
+  object-fit: contain
+  border-radius: apx(20)
+  background: #fff
+  overflow: hidden
+
+  +desktop
+    +awh(640 * .4, 853 * .4)
+  +mobile
+    +awh(60)

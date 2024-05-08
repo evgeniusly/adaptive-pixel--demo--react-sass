@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import { getApxInterface, getIsMobileInterface } from "adaptive-pixel";
+import Main from "./components/Main/Main";
+import "./main.sass";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [apx, setApx] = useState(1);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const apxInterface = getApxInterface({
+      setter: setApx,
+    });
+    const isMobileInterface = getIsMobileInterface({
+      setter: setIsMobile,
+    });
+
+    apxInterface.calculate();
+    isMobileInterface.calculate();
+
+    apxInterface.startListeners();
+    isMobileInterface.startListeners();
+
+    return () => {
+      apxInterface.cleanListeners();
+      isMobileInterface.cleanListeners();
+    };
+  }, []);
+
+  useEffect(() => console.log("apx", apx), [apx]);
+  useEffect(() => console.log("isMobile", isMobile), [isMobile]);
+
+  return <Main isMobile={isMobile} apx={apx} />;
 }
 
 export default App;
