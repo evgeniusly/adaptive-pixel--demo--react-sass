@@ -1,3 +1,4 @@
+import React from "react";
 import classes from "./Main.module.sass";
 import catImg from "../../assets/cat.jpg";
 
@@ -16,6 +17,9 @@ const Main: React.FC<{ isMobile: boolean; apx: number }> = ({
       </h1>
 
       <div className={classes.text}>
+        Resize the viewport to check.
+        <br />
+        <br />
         Some text on{" "}
         <span className={classes.accent}>
           {isMobile ? "mobile" : "desktop"}
